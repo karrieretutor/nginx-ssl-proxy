@@ -18,6 +18,7 @@ if [ -n "${ENABLE_SSL+1}" ] && [ "${ENABLE_SSL,,}" = "true" ]; then
   cp /usr/src/proxy_ssl.conf /etc/nginx/conf.d/proxy.conf
 else
   # No SSL
+  echo "no SSL..."
   cp /usr/src/proxy_nossl.conf /etc/nginx/conf.d/proxy.conf
 fi
 
@@ -42,11 +43,13 @@ if [ -n "${SERVICE_HOST_ENV_NAME+1}" ]; then
   # get value of the env variable in SERVICE_HOST_ENV_NAME as host, if that's not set,
   # SERVICE_HOST_ENV_NAME has the host value
   TARGET_SERVICE=${!SERVICE_HOST_ENV_NAME:=$SERVICE_HOST_ENV_NAME}
+  echo "Service Host"
 fi
 if [ -n "${SERVICE_PORT_ENV_NAME+1}" ]; then
   # get value of the env variable in SERVICE_PORT_ENV_NAME as port, if that's not set,
   # SERVICE_PORT_ENV_NAME has the port value
   TARGET_SERVICE="$TARGET_SERVICE:${!SERVICE_PORT_ENV_NAME:=$SERVICE_PORT_ENV_NAME}"
+  echo "Target_service"
 fi
 
 # Tell nginx the address and port of the service to proxy to
