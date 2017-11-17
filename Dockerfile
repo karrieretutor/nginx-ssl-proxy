@@ -30,4 +30,6 @@ ADD nginx/nginx.conf /etc/nginx/
 ADD nginx/proxy*.conf /usr/src/
 ADD nginx/extra/*.conf /etc/nginx/extra-conf.d/
 
-ENTRYPOINT ./start.sh
+WORKDIR /
+
+ENTRYPOINT /usr/src/start.sh
